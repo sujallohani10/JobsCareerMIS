@@ -24,6 +24,8 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
 
-Route::resource('jobcategory', JobCategoryController::class);
+Route::group(['middleware' => 'auth'], function() {
+    Route::resource('jobcategory', JobCategoryController::class);
+    Route::resource('users', UsersController::class);
+});
 
-Route::resource('users', UsersController::class);

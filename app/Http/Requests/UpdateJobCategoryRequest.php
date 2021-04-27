@@ -13,7 +13,7 @@ class UpdateJobCategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return Gate::allows('job_category_access');
     }
 
     /**

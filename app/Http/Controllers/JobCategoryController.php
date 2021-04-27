@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\JobCategory;
 use App\Http\Requests\StoreJobCategoryRequest;
 use App\Http\Requests\UpdateJobCategoryRequest;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class JobCategoryController extends Controller
 {
@@ -16,6 +18,8 @@ class JobCategoryController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('job_category_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $categories = JobCategory::all();
 
         return view('jobcategory.index', compact('categories'));
@@ -28,6 +32,7 @@ class JobCategoryController extends Controller
      */
     public function create()
     {
+        abort_if(Gate::denies('job_category_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         return view('jobcategory.create');
     }
 
@@ -52,6 +57,7 @@ class JobCategoryController extends Controller
      */
     public function show($id)
     {
+        abort_if(Gate::denies('job_category_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $category = JobCategory::find($id);
         return view('jobcategory.show', compact('category'));
     }
@@ -64,6 +70,7 @@ class JobCategoryController extends Controller
      */
     public function edit($id)
     {
+        abort_if(Gate::denies('job_category_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $category = JobCategory::find($id);
         return view('jobcategory.edit', compact('category'));
     }
@@ -90,6 +97,7 @@ class JobCategoryController extends Controller
      */
     public function destroy(JobCategory $Categories, $id)
     {
+        abort_if(Gate::denies('job_category_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $Categories = JobCategory::find($id);
         $Categories->delete();
 
