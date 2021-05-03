@@ -46,18 +46,18 @@ class UsersController extends Controller
             'roles.*' => 'integer',
             'roles' => 'required|array'
         ]);
-        
+
         $user = new User;
         $user->password = Hash::make($request->password);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->save();
-        
+
         $user->roles()->sync($request->input('roles', []));
 
         // redirect
-        Session::flash('alert-success', 'Successfully created users!');
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')
+                ->with('alert-success','You have successfully created a user!');;
     }
 
     public function show(User $user)
@@ -81,7 +81,7 @@ class UsersController extends Controller
     public function update(Request $request, User $user)
     {
         abort_if(Gate::denies('user_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
-        
+
         $this->validate($request, [
             'name' => 'required|string|max:255',
             'email' => ['required', 'email', Rule::unique('users')->ignore($user->id)],
@@ -89,18 +89,18 @@ class UsersController extends Controller
             'roles.*' => 'integer',
             'roles' => 'required|array'
         ]);
-        
+
         $user->password = Hash::make($request->password);
         $user->name = $request->name;
         $user->email = $request->email;
         $user->update();
-        
+
         $user->roles()->sync($request->input('roles', []));
 
         // redirect
-        Session::flash('alert-success', 'Successfully updated users!');
-        return redirect()->route('users.index');
-        
+        return redirect()->route('users.index')
+                ->with('alert-success','You have successfully updated a user!');;
+
     }
 
     public function destroy(User $user)
@@ -110,7 +110,7 @@ class UsersController extends Controller
         $user->delete();
 
         // redirect
-        Session::flash('alert-danger', 'Successfully deleted user!');
-        return redirect()->route('users.index');
+        return redirect()->route('users.index')
+                ->with('alert-danger','You have successfully deleted a user!');;
     }
 }

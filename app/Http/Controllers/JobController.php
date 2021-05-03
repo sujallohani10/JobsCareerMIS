@@ -2,7 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreJobRequest;
+use App\Http\Requests\UpdateJobRequest;
+use App\Models\Job;
+use App\Models\JobCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
+use Session;
 
 class JobController extends Controller
 {
@@ -13,7 +20,9 @@ class JobController extends Controller
      */
     public function index()
     {
-        //
+        $jobs = Job::all()->where('active', 1);
+
+        return view('jobs.index', compact('jobs'));
     }
 
     /**
@@ -23,7 +32,8 @@ class JobController extends Controller
      */
     public function create()
     {
-        //
+        $jobcategories = JobCategory::all();
+        return view('jobs.create', compact('jobcategories'));
     }
 
     /**
@@ -32,9 +42,31 @@ class JobController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreJobRequest $request)
     {
-        //
+
+        $job_expiry_date = date("Y-m-d", strtotime($request->job_expiry_date));
+
+        $validated = $request->validated();
+        if($validated) {
+            $job = new Job;
+            $job->job_title = $request->job_title;
+            $job->job_desc = $request->job_desc;
+            $job->job_qualification = $request->job_qualification;
+            $job->job_experience = $request->job_experience;
+            $job->job_expiry_date = $job_expiry_date;
+            $job->company_address = $request->company_address;
+            $job->min_salary = $request->min_salary;
+            $job->max_salary = $request->max_salary;
+            $job->category_id = $request->category_id;
+            $job->job_type = $request->job_type;
+            $job->active = 1;
+            $job->created_by = Auth::id();
+            $job->save();
+
+            return redirect()->route('jobs.index')
+                    ->with('alert-success','You have successfully created a job!');
+        }
     }
 
     /**
@@ -45,7 +77,8 @@ class JobController extends Controller
      */
     public function show($id)
     {
-        //
+        $job = Job::find($id);
+        return view('jobs.show', compact('job'));
     }
 
     /**
@@ -56,7 +89,9 @@ class JobController extends Controller
      */
     public function edit($id)
     {
-        //
+        $job = Job::find($id);
+        $jobcategories = JobCategory::all();
+        return view('jobs.edit', compact(['job', 'jobcategories']));
     }
 
     /**
@@ -66,9 +101,29 @@ class JobController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateJobRequest $request, Job $job)
     {
-        //
+        $job_expiry_date = date("Y-m-d", strtotime($request->job_expiry_date));
+
+        $validated = $request->validated();
+        if($validated) {
+            $job->job_title = $request->job_title;
+            $job->job_desc = $request->job_desc;
+            $job->job_qualification = $request->job_qualification;
+            $job->job_experience = $request->job_experience;
+            $job->job_expiry_date = $job_expiry_date;
+            $job->company_address = $request->company_address;
+            $job->min_salary = $request->min_salary;
+            $job->max_salary = $request->max_salary;
+            $job->category_id = $request->category_id;
+            $job->job_type = $request->job_type;
+            $job->active = 1;
+            $job->created_by = Auth::id();
+            $job->update();
+
+            return redirect()->route('jobs.index')
+                ->with('alert-success','You have successfully updated a job!');
+        }
     }
 
     /**
@@ -77,8 +132,11 @@ class JobController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Job $job)
     {
-        //
+        $job->delete();
+        //Session::flash('alert-danger', 'Successfully deleted user!');
+        return redirect()->route('jobs.index')
+                ->with('alert-danger','You have deleted a job!');
     }
 }

@@ -29,3 +29,5 @@ Route::group(['middleware' => 'auth'], function() {
     Route::resource('users', UsersController::class);
 });
 
+Route::resource('jobs', JobController::class);
+
