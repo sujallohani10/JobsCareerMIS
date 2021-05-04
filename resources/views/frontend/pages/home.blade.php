@@ -17,7 +17,7 @@
     {{-- @endif --}}
 
     <main id="main" class="container">
-        <div class="joblisting">
+        <div class="joblisting my-5">
             <div class="row">
                 <div class="col-12">
                     <div class="job-list border-bottom">
