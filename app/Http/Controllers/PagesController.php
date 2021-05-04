@@ -40,4 +40,9 @@ class PagesController extends Controller
     public function services() {
         return view('frontend.pages.services');
     }
+
+    public function jobDetail()
+    {
+        return view('frontend.pages.job-detail');
+    }
 }
