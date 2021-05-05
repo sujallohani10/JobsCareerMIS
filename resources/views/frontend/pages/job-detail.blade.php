@@ -7,15 +7,15 @@
                 <div class="job-list-details">
                     <div class="job-list-info">
                         <div class="job-list-title">
-                            <h5 class="mb-0"><a href="{{ url('job-detail') }}">Toon Boom Harmony courses</a></h5>
-                            <span class="job-type">Freelance</span>
+                            <h5 class="mb-0"><a href="{{ url('job-detail') }}">Human Resource Manager</a></h5>
+                            <span class="job-type">Full-Time</span>
                         </div>
                         <div class="job-list-option">
                             <ul class="list-unstyled">
                                 <li> <span class="mr-1">via</span> <a href="employer-detail.html">Toon Boom Harmony
                                         courses</a>
                                 </li>
-                                <li><i class="ri-map-pin-fill icon-size"></i>Parsippany, NJ 07054</li>
+                                <li><i class="ri-map-pin-fill icon-size"></i>South West & M5 Corridor</li>
                                 <li><i class="ri-filter-2-fill icon-size"></i>Accountancy</li>
                             </ul>
                         </div>
@@ -24,7 +24,7 @@
                 <div class="job-list-favourite-time d-flex justify-content-between">
                     <span class="job-list-time">
                         <i class="ri-time-fill icon-size"></i>
-                        1M ago
+                        22H ago
                     </span>
                     <div>
                         <button type="button" class="btn btn-primary btn-sm d-flex"><i class="ri-send-plane-fill mr-1"></i>Apply for job</button>
@@ -46,10 +46,10 @@
                 </div>
                 <div class="col-md-4 col-sm-6 mb-4">
                     <div class="d-flex">
-                        <i class="ri-women-fill font-xll"></i>
+                        <i class="ri-calendar-fill font-xll"></i>
                         <div class="feature-info-content pl-3">
-                            <label class="mb-1">Gender</label>
-                            <span class="mb-0 font-weight-bold d-block text-dark">Female</span>
+                            <label class="mb-1">Expired on</label>
+                            <span class="mb-0 font-weight-bold d-block text-dark">5 May 2021</span>
                         </div>
                     </div>
                 </div>
