@@ -90,8 +90,10 @@ class JobController extends Controller
     public function edit($id)
     {
         $job = Job::find($id);
-        $jobcategories = JobCategory::all();
-        return view('jobs.edit', compact(['job', 'jobcategories']));
+        $jobCategoryById = JobCategory::find($job->category_id);
+        $jobcategories = JobCategory::all()
+                            ->where('id', '!=', $job->category_id);
+        return view('jobs.edit', compact(['job', 'jobcategories', 'jobCategoryById']));
     }
 
     /**

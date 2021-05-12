@@ -25,6 +25,7 @@
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <label for="category_id" class="block font-medium text-sm text-gray-700">Job Category</label>
                             <select name="category_id" id="category_id" class="form-input rounded-md shadow-sm mt-1 block w-full">
+                                <option value="{{ $jobCategoryById->id }}">{{ $jobCategoryById->category_name }}</option>
                                 @foreach ($jobcategories as $category)
                                     <option value="{{ $category->id }}">{{$category->category_name}}</option>
                                 @endforeach
@@ -36,9 +37,9 @@
 
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <label for="job_desc" class="block font-medium text-sm text-gray-700">Description</label>
-                            <textarea name="job_desc" id="job_desc" type="text" class="form-input rounded-md shadow-sm mt-1 block w-full"
-                                   value="{{ old('job_desc', $job->job_desc) }}">
-                                </textarea>
+                            <textarea name="job_desc" id="job_desc" type="text" class="form-input rounded-md shadow-sm mt-1 block w-full">
+                                {{ old('job_desc', $job->job_desc) }}
+                            </textarea>
                             @error('job_desc')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
                             @enderror
@@ -46,7 +47,7 @@
 
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <label for="job_qualification" class="block font-medium text-sm text-gray-700">Qualification</label>
-                            <input type="text" name="job_qualification" id="job_desc" type="text" class="form-input rounded-md shadow-sm mt-1 block w-full"
+                            <input type="text" name="job_qualification" id="job_qualification" type="text" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('job_qualification', $job->job_qualification) }}" />
                             @error('job_qualification')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
@@ -118,4 +119,9 @@
             </div>
         </div>
     </div>
+
+    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+        <script>
+            CKEDITOR.replace( 'job_desc' );
+    </script>
 </x-app-layout>

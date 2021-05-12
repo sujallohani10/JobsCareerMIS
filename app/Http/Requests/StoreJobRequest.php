@@ -42,6 +42,10 @@ class StoreJobRequest extends FormRequest
                 'required',
                 'integer'
             ],
+            'job_qualification'    => [
+                'required',
+                'string'
+            ],
         ];
     }
 
