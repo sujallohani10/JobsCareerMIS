@@ -73,10 +73,28 @@
                         </div>
 
                         <div class="px-4 py-5 bg-white sm:p-6">
+                            <label for="company_name" class="block font-medium text-sm text-gray-700">Company Name</label>
+                            <input type="text" name="company_name" id="company_name" type="text" class="form-input rounded-md shadow-sm mt-1 block w-full"
+                                   value="{{ old('company_name', $job->company_name) }}" />
+                            @error('company_name')
+                                <p class="text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="px-4 py-5 bg-white sm:p-6">
                             <label for="company_address" class="block font-medium text-sm text-gray-700">Company Address</label>
                             <input type="text" name="company_address" id="company_address" type="text" class="form-input rounded-md shadow-sm mt-1 block w-full"
                                    value="{{ old('company_address', $job->company_address) }}" />
                             @error('company_address')
+                                <p class="text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <div class="px-4 py-5 bg-white sm:p-6">
+                            <label for="career_level" class="block font-medium text-sm text-gray-700">Career Level</label>
+                            <input type="text" name="career_level" id="career_level" type="text" class="form-input rounded-md shadow-sm mt-1 block w-full"
+                                   value="{{ old('career_level', $job->career_level) }}" />
+                            @error('career_level')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>

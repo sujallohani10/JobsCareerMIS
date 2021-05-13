@@ -21,7 +21,9 @@ class CreateJobsTable extends Migration
             $table->string('job_qualification')->nullable();
             $table->string('job_experience')->nullable();
             $table->date('job_expiry_date');
+            $table->string('company_name');
             $table->string('company_address');
+            $table->string('career_level');
             $table->string('job_type');
             $table->integer('min_salary');
             $table->integer('max_salary');

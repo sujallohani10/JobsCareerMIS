@@ -29,10 +29,7 @@ class PagesController extends Controller
 
     public function jobDetail($id)
     {
-        //echo $id;die;
-
         $job = Job::find($id);
-        //return view('jobs.show', compact('job'));
 
         return view('frontend.pages.job-detail', compact('job'));
     }

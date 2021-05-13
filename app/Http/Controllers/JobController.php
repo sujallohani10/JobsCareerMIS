@@ -55,10 +55,12 @@ class JobController extends Controller
             $job->job_qualification = $request->job_qualification;
             $job->job_experience = $request->job_experience;
             $job->job_expiry_date = $job_expiry_date;
+            $job->company_name = $request->company_name;
             $job->company_address = $request->company_address;
             $job->min_salary = $request->min_salary;
             $job->max_salary = $request->max_salary;
             $job->category_id = $request->category_id;
+            $job->career_level = $request->career_level;
             $job->job_type = $request->job_type;
             $job->active = 1;
             $job->created_by = Auth::id();
@@ -114,10 +116,12 @@ class JobController extends Controller
             $job->job_qualification = $request->job_qualification;
             $job->job_experience = $request->job_experience;
             $job->job_expiry_date = $job_expiry_date;
+            $job->company_name = $request->company_name;
             $job->company_address = $request->company_address;
             $job->min_salary = $request->min_salary;
             $job->max_salary = $request->max_salary;
             $job->category_id = $request->category_id;
+            $job->career_level = $request->career_level;
             $job->job_type = $request->job_type;
             $job->active = 1;
             $job->created_by = Auth::id();

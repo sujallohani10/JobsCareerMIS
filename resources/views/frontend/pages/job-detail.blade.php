@@ -12,7 +12,7 @@
                         </div>
                         <div class="job-list-option">
                             <ul class="list-unstyled">
-                                <li> <span class="mr-1">via</span> <a href="employer-detail.html">Employer detail</a>
+                                <li> <span class="mr-1">via</span> <a href="#">{{ $job->company_name }}</a>
                                 </li>
                                 <li><i class="ri-map-pin-fill icon-size"></i>{{$job->company_address}}</li>
                                 <li><i class="ri-filter-2-fill icon-size"></i>{{$job->jobcategories->category_name}}</li>
@@ -39,7 +39,7 @@
                         <i class="ri-money-dollar-circle-fill font-xll"></i>
                         <div class="feature-info-content pl-3">
                             <label class="mb-1">Offered Salary</label>
-                            <span class="mb-0 font-weight-bold d-block text-dark">AUD {{$job->min_salary}} - AUD {{$job->min_salary}}</span>
+                            <span class="mb-0 font-weight-bold d-block text-dark">AUD {{$job->min_salary}} - AUD {{$job->max_salary}}</span>
                         </div>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                         <i class="ri-calendar-fill font-xll"></i>
                         <div class="feature-info-content pl-3">
                             <label class="mb-1">Expired on</label>
-                            <span class="mb-0 font-weight-bold d-block text-dark">{{$job->job_expiry_date}}</span>
+                            <span class="mb-0 font-weight-bold d-block text-dark">{{ \Carbon\Carbon::parse($job->job_expiry_date)->toFormattedDateString() }}</span>
                         </div>
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                         <i class="ri-bar-chart-fill font-xll"></i>
                         <div class="feature-info-content pl-3">
                             <label class="mb-1">Career Level</label>
-                            <span class="mb-0 font-weight-bold d-block text-dark">Executive</span>
+                            <span class="mb-0 font-weight-bold d-block text-dark">{{$job->career_level}}</span>
                         </div>
                     </div>
                 </div>
