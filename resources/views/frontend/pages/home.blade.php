@@ -19,6 +19,34 @@
     <main id="main" class="container">
         <div class="joblisting my-5">
             <div class="row">
+                @foreach ($jobs as $job )
+                    <div class="col-12">
+                        <div class="job-list border-bottom">
+                            <div class="job-list-details">
+                                <div class="job-list-info">
+                                    <div class="job-list-title">
+                                        <h5 class="mb-0"><a href="{{ url('job-detail/'.$job->id) }}">{{ $job->job_title }}</a></h5>
+                                        <span class="job-type">{{$job->job_type}}</span>
+                                    </div>
+                                    <div class="job-list-option">
+                                        <ul class="list-unstyled">
+                                            <li> <span class="mr-1">via</span> <a href="employer-detail.html">Employer detail</a>
+                                            </li>
+                                            <li><i class="ri-map-pin-fill icon-size"></i>{{$job->company_address}}</li>
+                                            <li><i class="ri-filter-2-fill icon-size"></i>{{$job->jobcategories->category_name}}</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="job-list-favourite-time">
+                                <span class="job-list-time">
+                                    <i class="ri-time-fill icon-size"></i>
+                                    {{ $job->created_at->diffForHumans() }}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
                 <div class="col-12">
                     <div class="job-list border-bottom">
                         <div class="job-list-details">

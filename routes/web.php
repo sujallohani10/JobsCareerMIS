@@ -18,7 +18,8 @@ use App\Http\Controllers\PagesController;
 */
 
 Route::get('/', [PagesController::class, 'home']);
-Route::get('/job-detail', [PagesController::class, 'jobDetail']);
+//Route::get('/job-detail', [PagesController::class, 'jobDetail']);
+Route::get('/job-detail/{id}', [PagesController::class, 'jobDetail']);
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

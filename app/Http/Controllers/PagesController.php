@@ -2,13 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\FAQ;
-use App\Models\Home;
-use App\Models\Team;
-use App\Models\Service;
-use App\Models\Contact;
-use App\Models\About;
-use App\Models\Testimonial;
+use App\Models\Job;
+use App\Models\JobCategory;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -25,24 +20,20 @@ class PagesController extends Controller
     }
 
     public function home() {
-        $home = [];
-        $services = [];
-        $teams = [];
-        $contact = [];
-        $faqs = [];
-        $about = [];
-        $testimonials = [];
+        $jobs = Job::all()->where('active', 1);
+
         // dd($about);
 
-        return view('frontend.pages.home')->with(compact('home', 'services', 'teams', 'contact', 'faqs', 'about', 'testimonials'));
+        return view('frontend.pages.home')->with(compact('jobs'));
     }
 
-    public function services() {
-        return view('frontend.pages.services');
-    }
-
-    public function jobDetail()
+    public function jobDetail($id)
     {
-        return view('frontend.pages.job-detail');
+        //echo $id;die;
+
+        $job = Job::find($id);
+        //return view('jobs.show', compact('job'));
+
+        return view('frontend.pages.job-detail', compact('job'));
     }
 }
