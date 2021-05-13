@@ -65,7 +65,7 @@
 
                         <div class="px-4 py-5 bg-white sm:p-6">
                             <label for="job_expiry_date" class="block font-medium text-sm text-gray-700">Expiry Date</label>
-                            <input type="text" name="job_expiry_date" id="job_expiry_date" type="text" class="form-input rounded-md shadow-sm mt-1 block w-full"
+                            <input type="text" name="job_expiry_date" id="job_expiry_date" type="text" class="form-input rounded-md shadow-sm mt-1 block w-full datepicker"
                                    value="{{ old('job_expiry_date', $job->job_expiry_date) }}" />
                             @error('job_expiry_date')
                                 <p class="text-sm text-red-600">{{ $message }}</p>
@@ -123,5 +123,13 @@
     <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
         <script>
             CKEDITOR.replace( 'job_desc' );
+
+            $( function() {
+                $( ".datepicker" ).datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    dateFormat: "yy-mm-dd",
+                });
+            } );
     </script>
 </x-app-layout>
