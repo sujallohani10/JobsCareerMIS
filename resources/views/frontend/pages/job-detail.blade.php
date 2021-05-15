@@ -26,7 +26,7 @@
                         {{ $job->created_at->diffForHumans() }}
                     </span>
                     <div>
-                        <button type="button" class="btn btn-primary btn-sm d-flex"><i class="ri-send-plane-fill mr-1"></i>Apply for job</button>
+                        <button type="button" class="btn btn-primary btn-sm d-flex" data-toggle="modal" data-target="#exampleModal" data-title="{{$job->job_title}}"><i class="ri-send-plane-fill mr-1"></i>Apply for job</button>
                     </div>
                 </div>
             </div>
@@ -96,6 +96,34 @@
 
             <p>{!! $job->job_desc !!}</p>
         </div>
-    </section>
 
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Job title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-12">
+                        <h6 class="mb-4 font-weight-bold">File Attachments</h6>
+                        </div>
+                    </div>
+                    <div class="custom-file attachment">
+                        <input type="file" class="custom-file-input">
+                        <label class="custom-file-label">Choose file</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Send CV</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </section>
 @endsection

@@ -33,4 +33,12 @@ class PagesController extends Controller
 
         return view('frontend.pages.job-detail', compact('job'));
     }
+
+    public function about() {
+        return view('frontend.pages.about');
+    }
+
+    public function contact() {
+        return view('frontend.pages.contact');
+    }
 }

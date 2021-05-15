@@ -10,8 +10,8 @@
           <nav class="nav-menu d-none d-lg-block">
             <ul>
               <li class="active"><a href="{{ url('/') }}">Home</a></li>
-              <li><a href="#about">About</a></li>
-              <li><a href="#services">Contact</a></li>
+              <li><a href="{{ url('/about') }}">About</a></li>
+              <li><a href="{{ url('/contact') }}">Contact</a></li>
               {{-- <li class="drop-down"><a href="">Drop Down</a>
                 <ul>
                   <li><a href="#">Drop Down 1</a></li>

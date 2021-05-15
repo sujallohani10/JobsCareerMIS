@@ -2249,3 +2249,32 @@ section {
 .font-xll {
   font-size: 34px;
 }
+
+.find-job {
+    z-index: 1;
+    padding: 30px;
+    background: #ffffff;
+    opacity: 1;
+    box-shadow: 5px 10px 18px #4e4e4e;
+}
+
+.find-a-job-btn {
+    background: #e03a3c;
+    color: #fff;
+    border-radius: 4px;
+    padding: 8px 25px;
+    white-space: nowrap;
+    transition: 0.3s;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+    width: 100%;
+    border: none;
+}
+.custom-file.attachment:hover {
+  cursor: pointer;
+}
+
+.fa-3x {
+  font-size: 2em;
+}

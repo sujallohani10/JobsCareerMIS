@@ -8,9 +8,35 @@
         <div class="container-fluid position-absolute" data-aos="zoom-out" data-aos-delay="100">
             <img src="https://www.julianabicycles.com/jfiles/styles/scb_natural_1440_auto/public/hero/my21_hero_roubion.jpg?itok=N-48OuC6"
                 alt="">
-            <div class="row justify-content-center">
+        </div>
 
-            </div>
+        <div class="row justify-content-center container-fluid">
+            <div class="tab-pane fade show active find-job" id="find-job" role="tabpanel" aria-labelledby="find-job-tab">
+                <h6 class="font-weight-bold mb-3">Find A Job</h6>
+                <form class="form-inline">
+                  <div class="row w-100">
+                    <div class="col-lg-4 col-sm-4">
+                      <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Job name">
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-4">
+                      <div class="input-group">
+                        <select class="form-control basic-select select2-hidden-accessible" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                          <option data-select2-id="3">Job Time</option>
+                          <option>Part time</option>
+                          <option>Full time</option>
+                          <option>Freelance</option>
+                          <option>Temporary</option>
+                        </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="2" style="width: 250px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-f8v4-container"><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+                      </div>
+                    </div>
+                    <div class="col-lg-4 col-sm-4">
+                    <button class="find-a-job-btn">Search</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
         </div>
 
     </section><!-- End Hero -->
