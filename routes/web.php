@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JobApplicationController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobCategoryController;
 use App\Http\Controllers\JobController;
@@ -17,11 +18,12 @@ use App\Http\Controllers\PagesController;
 |
 */
 
-Route::get('/', [PagesController::class, 'home']);
+Route::get('/', [PagesController::class, 'home'])->name('home');
 Route::get('/about', [PagesController::class, 'about']);
 Route::get('/contact', [PagesController::class, 'contact']);
-//Route::get('/job-detail', [PagesController::class, 'jobDetail']);
-Route::get('/job-detail/{id}', [PagesController::class, 'jobDetail']);
+Route::get('/job-detail/{id}', [PagesController::class, 'jobDetail'])->name('jobDetail');
+Route::post('apply', [JobApplicationController::class, 'apply'])->name('jobapplication.apply');
+
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
     return view('dashboard');

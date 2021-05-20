@@ -35,4 +35,9 @@ class Job extends Model
     public function verifiedby() {
         return $this->belongsTo(User::class, 'verified_by');
     }
+
+    public function jobapplication()
+    {
+        return $this->hasMany(JobApplication::class);
+    }
 }

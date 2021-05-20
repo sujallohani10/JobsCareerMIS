@@ -8,6 +8,7 @@
   <title>Jobs Career for Job Seeker</title>
   <meta content="" name="description">
   <meta content="" name="keywords">
+  @yield('head')
 
   <!-- Favicons -->
   <link href="/assets/img/favicon.png" rel="icon">
@@ -57,6 +58,7 @@
     <!-- Template Main JS File -->
     <script src="/assets/js/main.js"></script>
 
+    @yield('scripts')
 </body>
 
 </html>

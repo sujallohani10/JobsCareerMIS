@@ -6,8 +6,7 @@
     <section id="hero" class="d-flex align-items-center">
 
         <div class="container-fluid position-absolute" data-aos="zoom-out" data-aos-delay="100">
-            <img src="https://www.julianabicycles.com/jfiles/styles/scb_natural_1440_auto/public/hero/my21_hero_roubion.jpg?itok=N-48OuC6"
-                alt="">
+            <img src="{{ url('assets/img/home.jpg') }}" alt="homepage">
         </div>
 
         <div class="row justify-content-center container-fluid">

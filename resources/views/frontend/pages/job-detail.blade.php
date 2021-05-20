@@ -26,7 +26,7 @@
                         {{ $job->created_at->diffForHumans() }}
                     </span>
                     <div>
-                        <button type="button" class="btn btn-primary btn-sm d-flex" data-toggle="modal" data-target="#exampleModal" data-title="{{$job->job_title}}"><i class="ri-send-plane-fill mr-1"></i>Apply for job</button>
+                        <button type="button" class="btn btn-primary btn-sm d-flex" data-toggle="modal" data-target="#jobApplyModal" data-title="{{$job->job_title}}"><i class="ri-send-plane-fill mr-1"></i>Apply for job</button>
                     </div>
                 </div>
             </div>
@@ -98,32 +98,58 @@
         </div>
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal fade" id="jobApplyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Job title</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-12">
-                        <h6 class="mb-4 font-weight-bold">File Attachments</h6>
+                    <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">{{$job->job_title}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <form method="POST" id="applicationForm" action="{{ route('jobapplication.apply') }}" enctype="multipart/form-data">
+                        @csrf
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-12">
+                                <h6 class="mb-4 font-weight-bold">CV Attachments</h6>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <input type="file" class="form-control-file @error('file_cv') is-invalid @enderror" name="file_cv" id="file_cvInput" value="{{ old('file_cv') }}" required>
+                                <p class="">
+                                    doc, docx, pdf up to 2MB
+                                </p>
+                                @error('file_cv')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
-                    <div class="custom-file attachment">
-                        <input type="file" class="custom-file-input">
-                        <label class="custom-file-label">Choose file</label>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Send CV</button>
-                </div>
+                        <div class="modal-footer">
+                            <input type="hidden" name="job_id" id="job_id" value="{{$job->id}}">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Send CV</button>
+                        </div>
+                    </form>
             </div>
             </div>
         </div>
     </section>
+@endsection
+
+@section('scripts')
+@parent
+
+@if($errors->has('file_cv'))
+    <script>
+    $(function() {
+        $('#jobApplyModal').modal({
+            show: true
+        });
+    });
+
+    </script>
+@endif
 @endsection
