@@ -22,7 +22,7 @@
                     <div class="col-lg-4 col-sm-4">
                       <div class="input-group">
                         <select class="form-control basic-select select2-hidden-accessible" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                          <option data-select2-id="3">Job Time</option>
+                          <option data-select2-id="3">Job Catogery</option>
                           <option>Part time</option>
                           <option>Full time</option>
                           <option>Freelance</option>

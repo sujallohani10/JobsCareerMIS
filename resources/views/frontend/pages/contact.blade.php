@@ -9,8 +9,6 @@
                             <div class="col-lg-12">
                                 <div class="section-title">
                                     <h2 class="title"><span>Let’s Get In Touch!</span></h2>
-                                    <p>We have completed over a 1000+ projects for five hundred clients. Give us your next
-                                        project.</p>
                                 </div>
                             </div>
                         </div>
@@ -55,8 +53,8 @@
                                     <i class="ri-map-2-line mr-3 fa-3x"></i>
                                     <div>
                                         <h5 class="mb-2">Address</h5>
-                                        <span class="d-block">214 West Arnold St. </span>
-                                        <span>New York, NY 10002</span>
+                                        <span class="d-block">A108 Adam Street </span>
+                                        <span>Sydney, Australia</span>
                                     </div>
                                 </div>
                             </div>
@@ -77,8 +75,8 @@
                                     <i class="ri-mail-line mr-3 fa-3x"></i>
                                     <div>
                                         <h5 class="mb-2">Email</h5>
-                                        <span class="d-block">support@jobster.demo</span>
-                                        <span>gethelp@jobster.demo</span>
+                                        <span class="d-block">support@jobcareer.com</span>
+                                        <span>gethelp@jobcareer.com</span>
                                     </div>
                                 </div>
                             </div>
