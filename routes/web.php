@@ -6,6 +6,7 @@ use App\Http\Controllers\JobCategoryController;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\PagesController;
+use App\Http\Controllers\DashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,9 +26,7 @@ Route::get('/job-detail/{id}', [PagesController::class, 'jobDetail'])->name('job
 Route::post('apply', [JobApplicationController::class, 'apply'])->name('jobapplication.apply');
 
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
 Route::group(['middleware' => 'auth'], function() {
     Route::resource('jobcategory', JobCategoryController::class);
