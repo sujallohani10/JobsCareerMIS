@@ -20,7 +20,9 @@ class JobController extends Controller
      */
     public function index()
     {
-        $jobs = Job::all()->where('active', 1);
+        $jobs = Job::all()
+                ->where('active', 1)
+                ->where('created_by', Auth::id());
 
         return view('jobs.index', compact('jobs'));
     }
