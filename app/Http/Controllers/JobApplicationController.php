@@ -8,9 +8,43 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Job;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class JobApplicationController extends Controller
 {
+
+    public function index(Request $request)
+    {
+        $jobsapplications = DB::table('job_application')
+                ->select('job_application.*', 'jobs.job_title','jobs.created_by','users.name')
+                ->leftJoin('jobs', 'job_application.job_id', '=', 'jobs.id')
+                ->leftJoin('users', 'job_application.user_id', '=', 'users.id')
+                ->where('jobs.created_by', '=', Auth::id())
+                ->get();
+        //dd($jobsapplications);
+
+        return view('jobapplication.index', compact('jobsapplications'));
+    }
+
+    public function edit($id) {
+        $job_application = JobApplication::find($id);
+        return view('jobapplication.edit', compact('job_application'));
+    }
+
+    public function update(JobApplication $job_application,Request $request, $id) {
+
+        $this->validate($request, [
+            'status' => 'required|integer',
+        ]);
+
+        $job_application->where('id', $id)->update(['status' => intval($request->status)]);
+
+
+        return redirect()->route('jobapplication.index')
+                ->with('alert-success','You have successfully updated an application!');
+    }
+
+    //method for job application from frontend
     public function apply(Request $request)
     {
         //file validation
@@ -31,21 +65,6 @@ class JobApplicationController extends Controller
             $job_application->save();
             return back()->with('success');
         }
-    }
-
-    public function index(Request $request)
-    {
-        $jobsapplications = DB::table('job_application')
-                ->leftJoin('jobs', 'job_application.job_id', '=', 'jobs.id')
-                ->leftJoin('users', 'job_application.user_id', '=', 'users.id')
-                ->where('jobs.created_by', '=', Auth::id())
-                ->get();
-
-
-        //dd(Storage::allDirectories());
-        //dd($jobsapplications);
-
-        return view('jobapplication.index', compact('jobsapplications'));
     }
 
     public function download_file(Request $request)

@@ -16,6 +16,13 @@ class JobApplication extends Model
      */
     protected $table = 'job_application';
 
+    protected $fillable = [
+        'user_id',
+        'job_id',
+        'status',
+        'cv_file_path',
+    ];
+
     // relation to jobs table for job_id column in job applicatio table
     public function jobs()
     {

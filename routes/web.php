@@ -34,6 +34,8 @@ Route::group(['middleware' => 'auth'], function() {
 });
 
 Route::get('jobapplication', [JobApplicationController::class, 'index'])->name('jobapplication.index');
+Route::get('jobapplication/{applicationid}/edit', [JobApplicationController::class, 'edit'])->name('jobapplication.edit');
+Route::put('update/{applicationid}', [JobApplicationController::class, 'update'])->name('jobapplication.update');
 Route::post('download', [JobApplicationController::class, 'download_file'])->name('jobapplication.download');
 Route::resource('jobs', JobController::class);
 
