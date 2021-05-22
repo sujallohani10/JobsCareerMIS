@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use App\Models\JobCategory;
+use App\Models\ForumQuestion;
 use Illuminate\Http\Request;
 
 class PagesController extends Controller
@@ -40,5 +41,11 @@ class PagesController extends Controller
 
     public function contact() {
         return view('frontend.pages.contact');
+    }
+
+    public function forum()
+    {
+        $forum_questions = ForumQuestion::all();
+        return view('frontend.pages.forum')->with(compact('forum_questions'));
     }
 }

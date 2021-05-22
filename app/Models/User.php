@@ -74,4 +74,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(JobApplication::class);
     }
+
+    public function forumquestion()
+    {
+        return $this->hasMany(ForumQuestion::class);
+    }
 }

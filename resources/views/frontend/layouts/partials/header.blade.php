@@ -29,13 +29,13 @@
                   <li><a href="#">Drop Down 4</a></li>
                 </ul>
               </li> --}}
-              <li><a href="#contact">Forum</a></li>
+              <li class="{{ (request()->is('forum')) ? 'active' : '' }}"><a href={{ url('/forum') }}>Forum</a></li>
             </ul>
           </nav><!-- .nav-menu -->
 
 
-          <a href="#about" class="get-started-btn scrollto">Login</a>
-          <a href="#about" class="get-started-btn scrollto">Register</a>
+          <a href="{{ url('/login') }}" class="get-started-btn scrollto">Login</a>
+          <a href="{{ url('/register') }}" class="get-started-btn scrollto">Register</a>
         </div>
       </div>
 

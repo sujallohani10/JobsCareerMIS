@@ -14,4 +14,9 @@ class ForumQuestion extends Model
         'question_title',
         'question_description',
     ];
+
+    public function users()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

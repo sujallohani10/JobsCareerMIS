@@ -2279,3 +2279,8 @@ section {
 .fa-3x {
   font-size: 2em;
 }
+
+/* for forum modal error message */
+#forumModal .hidden {
+    display: none;
+}

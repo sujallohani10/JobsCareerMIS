@@ -7,6 +7,7 @@ use App\Http\Controllers\JobController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\PagesController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ForumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,8 +23,11 @@ use App\Http\Controllers\DashboardController;
 Route::get('/', [PagesController::class, 'home'])->name('home');
 Route::get('/about', [PagesController::class, 'about']);
 Route::get('/contact', [PagesController::class, 'contact']);
+Route::get('/forum', [PagesController::class, 'forum'])->name('forum');
 Route::get('/job-detail/{id}', [PagesController::class, 'jobDetail'])->name('jobDetail');
 Route::post('apply', [JobApplicationController::class, 'apply'])->name('jobapplication.apply');
+
+Route::post('store', [ForumController::class, 'storeForumQuestion'])->name('forum.storeQuestion');
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
