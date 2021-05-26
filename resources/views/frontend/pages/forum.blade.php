@@ -32,7 +32,7 @@
                                 </div>
                                 <div class="job-list-option">
                                     <ul class="list-unstyled">
-                                        <li> <span class="mr-1">via</span> <a href="#">{{ $forum_question->user_id }}</a>
+                                        <li> <span class="mr-1">via</span> <a href="#">{{ $forum_question->users->name }}</a>
                                         </li>
                                         {{-- <li><i class="ri-map-pin-fill icon-size"></i>{{$job->company_address}}</li> --}}
                                         {{-- <li><i class="ri-filter-2-fill icon-size"></i>{{$job->jobcategories->category_name}}</li> --}}
