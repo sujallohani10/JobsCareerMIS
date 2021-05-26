@@ -48,4 +48,12 @@ class PagesController extends Controller
         $forum_questions = ForumQuestion::all();
         return view('frontend.pages.forum')->with(compact('forum_questions'));
     }
+
+    public function forumDetail($id)
+    {
+        $forum_question = ForumQuestion::find($id);
+        //dd($forum_question);
+
+        return view('frontend.pages.forum-detail')->with(compact('forum_question'));
+    }
 }
