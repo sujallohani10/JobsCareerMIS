@@ -2372,3 +2372,9 @@ a {
     width: 40px;
     height: auto
 }
+
+
+/* for forum answer modal error message */
+#replyModal .hidden {
+    display: none;
+}

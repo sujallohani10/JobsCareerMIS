@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\ForumAnswer;
 use App\Models\ForumQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +28,26 @@ class ForumController extends Controller
             $question->user_id = Auth::id();
             $question->save();
             return response()->json($question);
+        }
+    }
+
+    public function storeForumAnswer(Request $request)
+    {
+        //dd('forum store');
+        $rules = [
+            'answer_description' =>'required',
+        ];
+
+        $validator = Validator::make($request->all(), $rules);
+        if ($validator->fails()) {
+            return response()->json(array('errors' => $validator->getMessageBag()->toArray()));
+        } else {
+            $answer = new ForumAnswer();
+            $answer->answer_description = $request->answer_description;
+            $answer->question_id = $request->question_id;
+            $answer->user_id = Auth::id();
+            $answer->save();
+            return response()->json($answer);
         }
     }
 }

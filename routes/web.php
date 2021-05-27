@@ -29,6 +29,7 @@ Route::post('apply', [JobApplicationController::class, 'apply'])->name('jobappli
 
 Route::post('store', [ForumController::class, 'storeForumQuestion'])->name('forum.storeQuestion');
 Route::get('/forum-detail/{id}', [PagesController::class, 'forumDetail'])->name('forumDetail');
+Route::post('storeAnswer', [ForumController::class, 'storeForumAnswer'])->name('forum.storeAnswer');
 
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
