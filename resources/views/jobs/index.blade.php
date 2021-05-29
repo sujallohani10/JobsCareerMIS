@@ -41,7 +41,7 @@
                                         Expiry Date
                                     </th>
 
-                                    <th scope="col" width="200" class="px-6 py-3 bg-gray-50">
+                                    <th scope="col" width="300" class="px-6 py-4 bg-gray-50">
 
                                     </th>
                                 </tr>
@@ -72,6 +72,15 @@
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             <a href="{{ route('jobs.show', $job->id) }}" class="text-blue-600 hover:text-blue-900 mb-2 mr-2">View</a>
                                             <a href="{{ route('jobs.edit', $job->id) }}" class="text-indigo-600 hover:text-indigo-900 mb-2 mr-2">Edit</a>
+
+                                            @can('admin_job_verify')
+                                                <form class="inline-block" action="{{ route('jobs.verify', $job->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
+                                                    <input type="hidden" name="_method" value="POST">
+                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                    <input type="submit" class="text-green-600 hover:text-green-900 mb-2 mr-2" value="Verify">
+                                                </form>
+                                            @endcan
+
                                             <form class="inline-block" action="{{ route('jobs.destroy', $job->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
                                                 <input type="hidden" name="_method" value="DELETE">
                                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
