@@ -20,9 +20,14 @@ class JobController extends Controller
      */
     public function index()
     {
+        $authUserRole = Auth::user()->roles[0]->id;
+
         $jobs = Job::all()
-                ->where('active', 1)
-                ->where('created_by', Auth::id());
+                ->where('active', 1);
+
+        if(isset($authUserRole) && $authUserRole != 1) {
+                $jobs = $jobs->where('created_by', '==', Auth::id());
+        };
 
         return view('jobs.index', compact('jobs'));
     }
