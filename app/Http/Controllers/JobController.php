@@ -152,4 +152,19 @@ class JobController extends Controller
         return redirect()->route('jobs.index')
                 ->with('alert-danger','You have deleted a job!');
     }
+
+
+    /**
+     *Verify the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function verifyJob(Job $job)
+    {
+        //$job->delete();
+        //Session::flash('alert-danger', 'Successfully deleted user!');
+        return redirect()->route('jobs.index')
+                ->with('alert-danger','You have deleted a job!');
+    }
 }
