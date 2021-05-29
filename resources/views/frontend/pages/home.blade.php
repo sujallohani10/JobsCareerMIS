@@ -12,11 +12,12 @@
         <div class="row justify-content-center container-fluid">
             <div class="tab-pane fade show active find-job" id="find-job" role="tabpanel" aria-labelledby="find-job-tab">
                 <h6 class="font-weight-bold mb-3">Find A Job</h6>
-                <form class="form-inline">
+                <form class="form-inline" action="{{ route('job.search') }}" method="GET">
+                    @csrf
                   <div class="row w-100">
                     <div class="col-lg-4 col-sm-4">
                       <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Job name">
+                        <input type="text" class="form-control" name="name" placeholder="Job name" value="{{ $search }}">
                       </div>
                     </div>
                     <div class="col-lg-4 col-sm-4">
@@ -31,7 +32,7 @@
                       </div>
                     </div>
                     <div class="col-lg-4 col-sm-4">
-                    <button class="find-a-job-btn">Search</button>
+                    <button type="submit" class="find-a-job-btn">Search</button>
                     </div>
                   </div>
                 </form>
@@ -43,7 +44,18 @@
 
     <main id="main" class="container">
         <div class="joblisting my-5">
+            @if ($search)
+            <div class="mb-2 ml-2">
+                Search keyword(s): {{ $search }}
+            </div>
+            @endif
             <div class="row">
+                @if ($jobs->isEmpty())
+                <div class="ml-auto mr-auto my-3">
+                    No Jobs found for '{{ $search }}'.
+                    Please search for another keyword.
+                </div>
+                @endif
                 @foreach ($jobs as $job )
                     <div class="col-12">
                         <div class="job-list border-bottom">

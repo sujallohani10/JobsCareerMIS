@@ -22,10 +22,11 @@ class PagesController extends Controller
 
     public function home() {
         $jobs = Job::all()->where('active', 1);
+        $search = null;
 
         // dd($about);
 
-        return view('frontend.pages.home')->with(compact('jobs'));
+        return view('frontend.pages.home')->with(compact('jobs', 'search'));
     }
 
     public function jobDetail($id)
@@ -46,7 +47,8 @@ class PagesController extends Controller
     public function forum()
     {
         $forum_questions = ForumQuestion::all();
-        return view('frontend.pages.forum')->with(compact('forum_questions'));
+        $search = null;
+        return view('frontend.pages.forum')->with(compact('forum_questions', 'search'));
     }
 
     public function forumDetail($id)
@@ -55,5 +57,19 @@ class PagesController extends Controller
         //dd($forum_question);
 
         return view('frontend.pages.forum-detail')->with(compact('forum_question'));
+    }
+
+    public function search(Request $request)
+    {
+        $search = $request->name;
+        $jobs = Job::query()->where('job_title', 'LIKE', "%{$request->name}%")->get();
+        return view('frontend.pages.home')->with(compact('jobs', 'search'));
+    }
+
+    public function forumSearch(Request $request)
+    {
+        $search = $request->name;
+        $forum_questions = ForumQuestion::query()->where('question_title', 'LIKE', "%{$request->name}%")->get();
+        return view('frontend.pages.forum')->with(compact('forum_questions', 'search'));
     }
 }
