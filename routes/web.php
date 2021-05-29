@@ -31,6 +31,8 @@ Route::post('store', [ForumController::class, 'storeForumQuestion'])->name('foru
 Route::get('/forum-detail/{id}', [PagesController::class, 'forumDetail'])->name('forumDetail');
 Route::post('storeAnswer', [ForumController::class, 'storeForumAnswer'])->name('forum.storeAnswer');
 
+Route::get('/search', [PagesController::class, 'search'])->name('job.search');
+Route::get('/forum/search', [PagesController::class, 'forumSearch'])->name('forum.search');
 
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 

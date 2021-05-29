@@ -22,11 +22,13 @@ class PagesController extends Controller
 
     public function home() {
         $jobs = Job::all()->where('active', 1);
+        $JobCategories = JobCategory::all(); 
         $search = null;
+        $searchCategory = null;
 
         // dd($about);
 
-        return view('frontend.pages.home')->with(compact('jobs', 'search'));
+        return view('frontend.pages.home')->with(compact('jobs', 'JobCategories', 'search', 'searchCategory'));
     }
 
     public function jobDetail($id)
@@ -62,8 +64,10 @@ class PagesController extends Controller
     public function search(Request $request)
     {
         $search = $request->name;
-        $jobs = Job::query()->where('job_title', 'LIKE', "%{$request->name}%")->get();
-        return view('frontend.pages.home')->with(compact('jobs', 'search'));
+        $searchCategory = $request->category;
+        $jobs = Job::query()->where('job_title', 'LIKE', "%{$request->name}%")->where('category_id', '=', "{$request->category}")->get();
+        $JobCategories = JobCategory::all(); 
+        return view('frontend.pages.home')->with(compact('jobs', 'search', 'JobCategories', 'searchCategory'));
     }
 
     public function forumSearch(Request $request)

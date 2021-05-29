@@ -22,12 +22,12 @@
                     </div>
                     <div class="col-lg-4 col-sm-4">
                       <div class="input-group">
-                        <select class="form-control basic-select select2-hidden-accessible" data-select2-id="1" tabindex="-1" aria-hidden="true">
-                          <option data-select2-id="3">Job Catogery</option>
-                          <option>Part time</option>
-                          <option>Full time</option>
-                          <option>Freelance</option>
-                          <option>Temporary</option>
+                        <select name="category" class="form-control basic-select select2-hidden-accessible" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                          {{-- <option data-select2-id="3">Job Catogery</option> --}}
+                            <option selected>Choose...</option>
+                          @foreach ($JobCategories as $JobCategory)
+                            <option value="{{ $JobCategory->id }}">{{ $JobCategory->category_name }}</option>
+                          @endforeach
                         </select><span class="select2 select2-container select2-container--default" dir="ltr" data-select2-id="2" style="width: 250px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-f8v4-container"><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
                       </div>
                     </div>
