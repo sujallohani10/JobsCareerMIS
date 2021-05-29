@@ -15,9 +15,22 @@
                     New thread
                 </button>
                 </div>
-                <div class="col-12 col-md-3 p-0 mb-3"> <input type="text" class="form-control" placeholder="Search..."> </div>
+                <form class="form-inline" action="{{ route('forum.search') }}" method="GET">
+                    @csrf
+                    {{-- <div class='row'> --}}
+                    {{-- <div class="col-12 col-md-3 p-0 mb-3"> --}}
+                        <input type="text" class="form-control" name="name" placeholder="Search...">
+                        <button type="submit" class="find-a-forum-btn">Search</button>
+                    {{-- </div> --}}
+                    {{-- </div> --}}
+                </form>
             </div>
-            <div class="card mb-3">
+            @if ($search)
+            <div class="my-3">
+                Search keyword(s): {{ $search }}
+            </div>
+            @endif
+            <div class="card my-3">
                 <div class="card-header pl-0 pr-0">
                     <div class="row no-gutters w-100 align-items-center">
                         <div class="col ml-3">Topics</div>
@@ -29,6 +42,13 @@
                         </div>
                     </div>
                 </div>
+
+                @if ($forum_questions->isEmpty())
+                <div class="ml-auto mr-auto my-3">
+                    No Jobs found for '{{ $search }}'.
+                    Please search for another keyword.
+                </div>
+                @endif
                 @foreach ($forum_questions as $forum_question )
                     <div class="card-body py-3">
                         <div class="row no-gutters align-items-center">
