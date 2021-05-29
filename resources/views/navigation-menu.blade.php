@@ -23,20 +23,20 @@
                     </x-jet-nav-link>
                 </div>
                 @endcan
-                {{-- @can('job_access') --}}
+                @can('job_access')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('jobs.index') }}" :active="request()->routeIs('jobs.index')">
                         {{ __('Jobs') }}
                     </x-jet-nav-link>
                 </div>
-                {{-- @endcan --}}
-                {{-- @can('job_application_access') --}}
+                @endcan
+                @can('job_application')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('jobapplication.index') }}" :active="request()->routeIs('jobapplication.index')">
                         {{ __('Job Application') }}
                     </x-jet-nav-link>
                 </div>
-                {{-- @endcan --}}
+                @endcan
                 @can('admin_user_access')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">
