@@ -35,10 +35,15 @@
                                         Company Address
                                     </th>
                                     <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                        Qualification
-                                    </th>
-                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                                         Expiry Date
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Active
+                                    </th>
+
+                                    <th scope="col" class="px-6 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                        Verified
                                     </th>
 
                                     <th scope="col" width="300" class="px-6 py-4 bg-gray-50">
@@ -62,24 +67,46 @@
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $job->job_qualification }}
+                                            {{ $job->job_expiry_date }}
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                                            {{ $job->job_expiry_date }}
+                                            @if ($job->active == 1)
+                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                    Active
+                                                </span>
+                                            @else
+                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                                    Closed
+                                                </span>
+                                            @endif
+                                        </td>
+
+                                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                                            @if ($job->is_verified == 1)
+                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">
+                                                    Verified
+                                                </span>
+                                            @else
+                                                <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-red-100 text-red-800">
+                                                    Not Verified
+                                                </span>
+                                            @endif
                                         </td>
 
                                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                             <a href="{{ route('jobs.show', $job->id) }}" class="text-blue-600 hover:text-blue-900 mb-2 mr-2">View</a>
                                             <a href="{{ route('jobs.edit', $job->id) }}" class="text-indigo-600 hover:text-indigo-900 mb-2 mr-2">Edit</a>
 
-                                            @can('admin_job_verify')
-                                                <form class="inline-block" action="{{ route('jobs.verify', $job->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
-                                                    <input type="hidden" name="_method" value="POST">
-                                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                                    <input type="submit" class="text-green-600 hover:text-green-900 mb-2 mr-2" value="Verify">
-                                                </form>
-                                            @endcan
+                                            @if ($job->is_verified != 1)
+                                                @can('admin_job_verify')
+                                                    <form class="inline-block" action="{{ route('jobs.verify', $job->id) }}" method="post" onsubmit="return confirm('Are you sure?');">
+                                                        <input type="hidden" name="_method" value="put">
+                                                        <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                        <input type="submit" class="text-green-600 hover:text-green-900 mb-2 mr-2" value="Verify">
+                                                    </form>
+                                                @endcan
+                                            @endif
 
                                             <form class="inline-block" action="{{ route('jobs.destroy', $job->id) }}" method="POST" onsubmit="return confirm('Are you sure?');">
                                                 <input type="hidden" name="_method" value="DELETE">

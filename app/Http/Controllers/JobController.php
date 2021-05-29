@@ -160,11 +160,14 @@ class JobController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function verifyJob(Job $job)
+    public function verifyJob(Job $job, Request $request, $id)
     {
-        //$job->delete();
-        //Session::flash('alert-danger', 'Successfully deleted user!');
+        $job->where('id', $id)->update([
+                    'is_verified' => 1,
+                    'verified_by' => Auth::id(),
+                ]);
+
         return redirect()->route('jobs.index')
-                ->with('alert-danger','You have deleted a job!');
+                ->with('alert-success','You have successfully verified a job!');
     }
 }

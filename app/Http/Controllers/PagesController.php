@@ -21,8 +21,10 @@ class PagesController extends Controller
     }
 
     public function home() {
-        $jobs = Job::all()->where('active', 1);
-        $JobCategories = JobCategory::all(); 
+        $jobs = Job::all()
+                ->where('active', 1)
+                ->where('is_verified', 1);
+        $JobCategories = JobCategory::all();
         $search = null;
         $searchCategory = null;
 
@@ -66,7 +68,7 @@ class PagesController extends Controller
         $search = $request->name;
         $searchCategory = $request->category;
         $jobs = Job::query()->where('job_title', 'LIKE', "%{$request->name}%")->where('category_id', '=', "{$request->category}")->get();
-        $JobCategories = JobCategory::all(); 
+        $JobCategories = JobCategory::all();
         return view('frontend.pages.home')->with(compact('jobs', 'search', 'JobCategories', 'searchCategory'));
     }
 

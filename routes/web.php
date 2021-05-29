@@ -46,5 +46,5 @@ Route::get('jobapplication/{applicationid}/edit', [JobApplicationController::cla
 Route::put('update/{applicationid}', [JobApplicationController::class, 'update'])->name('jobapplication.update');
 Route::post('download', [JobApplicationController::class, 'download_file'])->name('jobapplication.download');
 Route::resource('jobs', JobController::class);
-Route::post('verifyjobs', [JobController::class], 'verifyJob')->name('jobs.verify');
+Route::put('verify/{jobid}', [JobController::class, 'verifyJob'])->name('jobs.verify');
 
