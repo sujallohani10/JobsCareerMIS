@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Job;
 use App\Models\JobCategory;
 use App\Models\ForumQuestion;
+use App\Models\JobApplication;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class PagesController extends Controller
 {
@@ -37,7 +39,17 @@ class PagesController extends Controller
     {
         $job = Job::find($id);
 
-        return view('frontend.pages.job-detail', compact('job'));
+        $appliedJob = false;
+        if(Auth::id()) {
+            $jobApplicationByUser = JobApplication::all()
+                                        ->where('job_id', $id)
+                                        ->where('user_id', Auth::id());
+
+            //dd($jobApplicationByUser);
+            (count($jobApplicationByUser) > 0) ? $appliedJob=true : false;
+        }
+
+        return view('frontend.pages.job-detail', compact('job', 'appliedJob'));
     }
 
     public function about() {

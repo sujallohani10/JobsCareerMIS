@@ -25,9 +25,23 @@
                         <i class="ri-time-fill icon-size"></i>
                         {{ $job->created_at->diffForHumans() }}
                     </span>
-                    <div>
-                        <button type="button" class="btn btn-primary btn-sm d-flex" data-toggle="modal" data-target="#jobApplyModal" data-title="{{$job->job_title}}"><i class="ri-send-plane-fill mr-1"></i>Apply for job</button>
-                    </div>
+                    @if (Auth::id())
+                        @if ($appliedJob)
+                            <div>
+                                <button type="button" class="btn btn-primary btn-sm d-flex"><i class="ri-send-plane-fill mr-1"></i>Application Sent</button>
+                            </div>
+                        @else
+                            <div>
+                                <button type="button" class="btn btn-primary btn-sm d-flex" data-toggle="modal" data-target="#jobApplyModal" data-title="{{$job->job_title}}"><i class="ri-send-plane-fill mr-1"></i>Apply for job</button>
+                            </div>
+                        @endif
+
+                    @else
+                        <div>
+                            <a href="{{route('login')}}">Sign in</a> or <a href="{{route('register')}}">Register</a> to apply.
+                        </div>
+                    @endif
+
                 </div>
             </div>
         </div>
