@@ -34,8 +34,12 @@
           </nav><!-- .nav-menu -->
 
 
-          <a href="{{ url('/login') }}" class="get-started-btn scrollto">Login</a>
-          <a href="{{ url('/register') }}" class="get-started-btn scrollto">Register</a>
+          @if (!Auth::id())
+                <a href="{{ url('/login') }}" class="get-started-btn scrollto">Login</a>
+                <a href="{{ url('/register') }}" class="get-started-btn scrollto">Register</a>
+            @else
+                <a href="{{ url('/dashboard') }}" class="btn btn-primary get-started-btn">My Dashboard</a>
+          @endif
         </div>
       </div>
 
