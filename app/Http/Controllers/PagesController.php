@@ -6,6 +6,7 @@ use App\Models\Job;
 use App\Models\JobCategory;
 use App\Models\ForumQuestion;
 use App\Models\JobApplication;
+use App\Models\ForumAnswer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -70,9 +71,11 @@ class PagesController extends Controller
     public function forumDetail($id)
     {
         $forum_question = ForumQuestion::find($id);
-        //dd($forum_question);
-
-        return view('frontend.pages.forum-detail')->with(compact('forum_question'));
+        $forum_answers = ForumAnswer::select('*')
+        ->join('users', 'users.id', '=', 'forum_answers.user_id')
+        ->where('forum_answers.question_id', $id)
+        ->get();
+        return view('frontend.pages.forum-detail')->with(compact('forum_question', 'forum_answers'));
     }
 
     public function search(Request $request)

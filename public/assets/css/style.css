@@ -2391,3 +2391,11 @@ a {
     display: inline-block;
     border: none;
 }
+.forum-messages {
+  background-color: rgba(0,0,0,.03);
+  padding: 8px;
+  margin-bottom: 4px;
+}
+.forum-messages-by {
+  margin-bottom: 16px;
+}
