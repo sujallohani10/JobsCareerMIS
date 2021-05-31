@@ -46,6 +46,10 @@ class UpdateJobRequest extends FormRequest
                 'required',
                 'string'
             ],
+            'status'    => [
+                'required',
+                'integer'
+            ],
         ];
     }
 
