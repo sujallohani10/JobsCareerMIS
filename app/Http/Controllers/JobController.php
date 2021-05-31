@@ -22,8 +22,7 @@ class JobController extends Controller
     {
         $authUserRole = Auth::user()->roles[0]->id;
 
-        $jobs = Job::all()
-                ->where('active', 1);
+        $jobs = Job::all();
 
         if(isset($authUserRole) && $authUserRole != 1) {
                 $jobs = $jobs->where('created_by', '==', Auth::id());
@@ -130,7 +129,7 @@ class JobController extends Controller
             $job->category_id = $request->category_id;
             $job->career_level = $request->career_level;
             $job->job_type = $request->job_type;
-            $job->active = 1;
+            $job->active = $request->status;
             $job->created_by = Auth::id();
             $job->update();
 

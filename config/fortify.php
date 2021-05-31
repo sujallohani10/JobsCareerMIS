@@ -2,6 +2,7 @@
 
 use App\Providers\RouteServiceProvider;
 use Laravel\Fortify\Features;
+use Illuminate\Support\Facades\Auth;
 
 return [
 
@@ -61,7 +62,19 @@ return [
     |
     */
 
-    'home' => RouteServiceProvider::HOME,
+    //'home' => RouteServiceProvider::HOME,
+    'home' => function(){
+        //if you want to go to a specific route
+        //return route('home');
+
+        //or if you have a bunch of redirection options
+        if (Auth::user()->roles[0]->role == 'Student') {
+           return route('home');
+        }
+        else{
+           return route('dashboard');
+        }
+    },
 
     /*
     |--------------------------------------------------------------------------
