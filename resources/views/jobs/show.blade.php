@@ -45,7 +45,7 @@
                                         Description
                                     </th>
                                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 bg-white divide-y divide-gray-200">
-                                        {{ $job->job_desc }}
+                                        {!! substr($job->job_desc, 0, 100) !!}
                                     </td>
                                 </tr>
                                 <tr class="border-b">
