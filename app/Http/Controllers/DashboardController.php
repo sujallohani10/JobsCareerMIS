@@ -7,6 +7,7 @@ use App\Models\JobApplication;
 use App\Models\JobCategory;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DashboardController extends Controller
 {
@@ -16,8 +17,12 @@ class DashboardController extends Controller
         $total_category = JobCategory::all()->count();
         $total_jobs = Job::all()->count();
         $total_job_application = JobApplication::all()->count();
+        $total_job_applied_student_users = JobApplication::all()
+                                            ->where('user_id', Auth::id())
+                                            ->count();
         //dd($total_users);
 
-        return view('dashboard', compact(['total_users', 'total_category', 'total_jobs', 'total_job_application']));
+
+        return view('dashboard', compact(['total_users', 'total_category', 'total_jobs', 'total_job_application', 'total_job_applied_student_users']));
     }
 }

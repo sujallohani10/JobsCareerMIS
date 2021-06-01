@@ -8,7 +8,13 @@
                     <div class="col-md-12">
                         <div class="card mb-4">
                             <div class="card-header">
-                                <div class="media flex-wrap w-100 align-items-center"> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583246/AAA/2.jpg" class="d-block ui-w-40 rounded-circle" alt="">
+                                <div class="media flex-wrap w-100 align-items-center">
+                                    @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                                        <button class="d-block ui-w-40 rounded-circle">
+                                            <img class="d-block ui-w-40 rounded-circle" src="{{ $forum_question->users->profile_photo_url }}" alt="{{ $forum_question->users->name }}" />
+                                        </button>
+                                    @endif
+                                    {{-- <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583246/AAA/2.jpg" class="d-block ui-w-40 rounded-circle" alt=""> --}}
                                     <div class="media-body ml-3"> <a href="javascript:void(0)" data-abc="true">{{ $forum_question->users->name }}</a>
                                         <div class="text-muted small"></div>
                                     </div>
@@ -31,10 +37,10 @@
             </div>
 
             <div class="container-fluid">
-                
+
                 <div class="row">
                     <div class="col-md-12">
-                        
+
                         <div class="card mb-4 p-3 d-flex">
                             @foreach ($forum_answers as $answer)
                             <div class="forum-messages">
@@ -45,10 +51,10 @@
                             </small>
                             @endforeach
                         </div>
-                         
+
                     </div>
                 </div>
-                               
+
             </div>
 
 

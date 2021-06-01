@@ -78,4 +78,17 @@ class JobApplicationController extends Controller
         }
 
     }
+
+    public function jobAppliedbyStudentUser(Request $request)
+    {
+        $jobsapplications = DB::table('job_application')
+                ->select('job_application.*', 'jobs.job_title','jobs.company_name', 'jobs.company_address', 'jobs.created_by','users.name')
+                ->leftJoin('jobs', 'job_application.job_id', '=', 'jobs.id')
+                ->leftJoin('users', 'job_application.user_id', '=', 'users.id')
+                ->where('job_application.user_id', '=', Auth::id())
+                ->get();
+        //dd($jobsapplications);
+
+        return view('jobapplication.appliedlist', compact('jobsapplications'));
+    }
 }
