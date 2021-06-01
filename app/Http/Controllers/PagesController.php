@@ -64,6 +64,7 @@ class PagesController extends Controller
     public function forum()
     {
         $forum_questions = ForumQuestion::all();
+        //dd($forum_questions);
         $search = null;
         return view('frontend.pages.forum')->with(compact('forum_questions', 'search'));
     }

@@ -26,6 +26,7 @@ class ForumController extends Controller
             $question->question_title = $request->question_title;
             $question->question_description = $request->question_description;
             $question->user_id = Auth::id();
+            $question->status = 1;
             $question->save();
             return response()->json($question);
         }
@@ -47,6 +48,13 @@ class ForumController extends Controller
             $answer->question_id = $request->question_id;
             $answer->user_id = Auth::id();
             $answer->save();
+
+            if($request->status){
+                $question = ForumQuestion::findorFail($request->question_id);
+                $question->status = $request->status;
+                $question->update();
+            }
+
             return response()->json($answer);
         }
     }
