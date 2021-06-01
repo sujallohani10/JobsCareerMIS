@@ -63,7 +63,7 @@
                     @if ($forum_question->status == 1)
                         @php $forum_status = 'Opened';$class="badge-success"; @endphp
                     @elseif ($forum_question->status == 2)
-                        @php $forum_status = 'Solved';$class="badge-danger" @endphp
+                        @php $forum_status = 'Closed';$class="badge-danger" @endphp
                     @endif
                     <div class="card-body py-3">
                         <div class="row no-gutters align-items-center">
