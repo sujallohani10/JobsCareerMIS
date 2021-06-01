@@ -17,6 +17,7 @@ class JobApplicationController extends Controller
 
     public function index(Request $request)
     {
+        abort_if(Gate::denies('job_application'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $jobsapplications = DB::table('job_application')
                 ->select('job_application.*', 'jobs.job_title','jobs.created_by','users.name')
                 ->leftJoin('jobs', 'job_application.job_id', '=', 'jobs.id')
@@ -29,11 +30,13 @@ class JobApplicationController extends Controller
     }
 
     public function edit($id) {
+        abort_if(Gate::denies('job_application'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $job_application = JobApplication::find($id);
         return view('jobapplication.edit', compact('job_application'));
     }
 
     public function update(JobApplication $job_application,Request $request, $id) {
+        abort_if(Gate::denies('job_application'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $this->validate($request, [
             'status' => 'required|integer',
@@ -71,6 +74,7 @@ class JobApplicationController extends Controller
 
     public function download_file(Request $request)
     {
+        abort_if(Gate::denies('job_application'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         //dd(storage_path('app/public/'));
         $path= $request['path'];
         /**this will force download your file**/
