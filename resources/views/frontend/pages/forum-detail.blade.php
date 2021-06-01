@@ -8,12 +8,18 @@
                     <div class="col-md-12">
                         <div class="card mb-4">
                             <div class="card-header">
-                                <div class="media flex-wrap w-100 align-items-center"> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583246/AAA/2.jpg" class="d-block ui-w-40 rounded-circle" alt="">
+                                <div class="media flex-wrap w-100 align-items-center">
+                                    @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
+                                        <button class="d-block ui-w-40 rounded-circle">
+                                            <img class="d-block ui-w-40 rounded-circle" src="{{ $forum_question->users->profile_photo_url }}" alt="{{ $forum_question->users->name }}" />
+                                        </button>
+                                    @endif
+                                    {{-- <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583246/AAA/2.jpg" class="d-block ui-w-40 rounded-circle" alt=""> --}}
                                     <div class="media-body ml-3"> <a href="javascript:void(0)" data-abc="true">{{ $forum_question->users->name }}</a>
                                         <div class="text-muted small"></div>
                                     </div>
                                     <div class="text-muted small ml-3">
-                                        <div>Member since: <strong>{{ $forum_question->users->created_at->toDateString() }}</strong></div>
+                                        <div>Member since: <strong>{{ \Carbon\Carbon::parse($forum_question->users->created_at)->format('d M, Y')}}</strong></div>
                                     </div>
                                 </div>
                             </div>
@@ -22,8 +28,22 @@
                                 <p> {!! $forum_question->question_description !!} </p>
                             </div>
                             <div class="card-footer d-flex flex-wrap justify-content-between align-items-center px-0 pt-0 pb-3">
-                                <div class="px-4 pt-3"> <a href="javascript:void(0)" class="text-muted d-inline-flex align-items-center align-middle" data-abc="true"> <i class="fa fa-heart text-danger"></i>&nbsp; <span class="align-middle">445</span> </a> <span class="text-muted d-inline-flex align-items-center align-middle ml-4"> <i class="fa fa-eye text-muted fsize-3"></i>&nbsp; <span class="align-middle">14532</span> </span> </div>
-                                <div class="px-4 pt-3"> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#replyModal"><i class="ion ion-md-create"></i>&nbsp; Reply</button> </div>
+                                {{-- <div class="px-4 pt-3"> <a href="javascript:void(0)" class="text-muted d-inline-flex align-items-center align-middle" data-abc="true"> <i class="fa fa-heart text-danger"></i>&nbsp; <span class="align-middle">445</span> </a> <span class="text-muted d-inline-flex align-items-center align-middle ml-4"> <i class="fa fa-eye text-muted fsize-3"></i>&nbsp; <span class="align-middle">14532</span> </span> </div> --}}
+                                @if (Auth::id())
+                                    @if ($forum_question->status != 2)
+                                        <div class="px-4 pt-3"> <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#replyModal"><i class="ion ion-md-create"></i>&nbsp; Reply</button> </div>
+                                    @else
+                                        <div class="px-4 pt-3">
+                                            <span class="badge badge-danger align-text-bottom ml-1">Thread Closed</span>
+                                        </div>
+                                    @endif
+
+                                @else
+                                    <div class="px-4 pt-3">
+                                        Please <a href="{{route('login')}}">Sign in</a> or <a href="{{route('register')}}">Register</a> to reply to forum.
+                                    </div>
+                                @endif
+
                             </div>
                         </div>
                     </div>
@@ -78,6 +98,15 @@
                                     <p class="alert alert-danger errorAnswerDesc hidden" style="margin-top: 5px!important"></p>
 
                                 </div>
+                                @if ($forum_question->user_id == Auth::id())
+                                    <div class="form-group">
+                                        <label for="status" class="block font-medium text-sm text-gray-700">Status</label>
+                                        <select name="status" id="status" class="custom-select">
+                                            <option >Select</option>
+                                            <option value="2">Solved</option>
+                                        </select>
+                                    </div>
+                                @endif
                             </form>
                         </div>
                         <div class="modal-footer">
@@ -107,6 +136,7 @@
                     '_token': "{{ csrf_token() }}",
                     'answer_description': CKEDITOR.instances.answer_description.getData(),
                     'question_id': $("#question_id").val(),
+                    'status': $("#status").val(),
                 },
                 success: function(data) {
                     $('.errorAnswerDesc').addClass('hidden');

@@ -9,12 +9,15 @@ use App\Models\Job;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class JobApplicationController extends Controller
 {
 
     public function index(Request $request)
     {
+        abort_if(Gate::denies('job_application'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $jobsapplications = DB::table('job_application')
                 ->select('job_application.*', 'jobs.job_title','jobs.created_by','users.name')
                 ->leftJoin('jobs', 'job_application.job_id', '=', 'jobs.id')
@@ -27,11 +30,13 @@ class JobApplicationController extends Controller
     }
 
     public function edit($id) {
+        abort_if(Gate::denies('job_application'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $job_application = JobApplication::find($id);
         return view('jobapplication.edit', compact('job_application'));
     }
 
     public function update(JobApplication $job_application,Request $request, $id) {
+        abort_if(Gate::denies('job_application'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $this->validate($request, [
             'status' => 'required|integer',
@@ -69,6 +74,7 @@ class JobApplicationController extends Controller
 
     public function download_file(Request $request)
     {
+        abort_if(Gate::denies('job_application'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         //dd(storage_path('app/public/'));
         $path= $request['path'];
         /**this will force download your file**/
@@ -77,5 +83,19 @@ class JobApplicationController extends Controller
             return response()->download($file_path);
         }
 
+    }
+
+    public function jobAppliedbyStudentUser(Request $request)
+    {
+        abort_if(Gate::denies('student_applied_jobs'), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        $jobsapplications = DB::table('job_application')
+                ->select('job_application.*', 'jobs.job_title','jobs.company_name', 'jobs.company_address', 'jobs.created_by','users.name')
+                ->leftJoin('jobs', 'job_application.job_id', '=', 'jobs.id')
+                ->leftJoin('users', 'job_application.user_id', '=', 'users.id')
+                ->where('job_application.user_id', '=', Auth::id())
+                ->get();
+        //dd($jobsapplications);
+
+        return view('jobapplication.appliedlist', compact('jobsapplications'));
     }
 }

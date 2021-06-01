@@ -19,4 +19,9 @@ class ForumQuestion extends Model
     {
         return $this->belongsTo(User::class, 'user_id');
     }
+
+    public function forumanswers()
+    {
+        return $this->hasMany(ForumAnswer::class);
+    }
 }

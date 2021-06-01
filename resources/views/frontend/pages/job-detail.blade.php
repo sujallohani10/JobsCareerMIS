@@ -38,7 +38,7 @@
 
                     @else
                         <div>
-                            <a href="{{route('login')}}">Sign in</a> or <a href="{{route('register')}}">Register</a> to apply.
+                            Please <a href="{{route('login')}}">Sign in</a> or <a href="{{route('register')}}">Register</a> to apply.
                         </div>
                     @endif
 

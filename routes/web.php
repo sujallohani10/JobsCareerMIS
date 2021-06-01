@@ -39,12 +39,15 @@ Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', [DashboardCon
 Route::group(['middleware' => 'auth'], function() {
     Route::resource('jobcategory', JobCategoryController::class);
     Route::resource('users', UsersController::class);
+
+    Route::get('jobapplication', [JobApplicationController::class, 'index'])->name('jobapplication.index');
+    Route::get('jobapplication/{applicationid}/edit', [JobApplicationController::class, 'edit'])->name('jobapplication.edit');
+    Route::get('appliedjobs', [JobApplicationController::class, 'jobAppliedbyStudentUser'])->name('jobapplication.appliedjobs');
+    Route::put('update/{applicationid}', [JobApplicationController::class, 'update'])->name('jobapplication.update');
+    Route::post('download', [JobApplicationController::class, 'download_file'])->name('jobapplication.download');
+    Route::resource('jobs', JobController::class);
+    Route::put('verify/{jobid}', [JobController::class, 'verifyJob'])->name('jobs.verify');
 });
 
-Route::get('jobapplication', [JobApplicationController::class, 'index'])->name('jobapplication.index');
-Route::get('jobapplication/{applicationid}/edit', [JobApplicationController::class, 'edit'])->name('jobapplication.edit');
-Route::put('update/{applicationid}', [JobApplicationController::class, 'update'])->name('jobapplication.update');
-Route::post('download', [JobApplicationController::class, 'download_file'])->name('jobapplication.download');
-Route::resource('jobs', JobController::class);
-Route::put('verify/{jobid}', [JobController::class, 'verifyJob'])->name('jobs.verify');
+
 

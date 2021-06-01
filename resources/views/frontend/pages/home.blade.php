@@ -86,6 +86,9 @@
                 @endforeach
             </div>
         </div>
+        <div class="d-flex justify-content-center">
+            {!! $jobs->links() !!}
+        </div>
     </main><!-- End #main -->
 
 @endsection

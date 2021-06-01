@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 use Session;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class JobController extends Controller
 {
@@ -20,6 +22,7 @@ class JobController extends Controller
      */
     public function index()
     {
+        abort_if(Gate::denies('job_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $authUserRole = Auth::user()->roles[0]->id;
 
         $jobs = Job::all();
@@ -38,6 +41,7 @@ class JobController extends Controller
      */
     public function create()
     {
+        abort_if(Gate::denies('job_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $jobcategories = JobCategory::all();
         return view('jobs.create', compact('jobcategories'));
     }
@@ -50,6 +54,7 @@ class JobController extends Controller
      */
     public function store(StoreJobRequest $request)
     {
+        abort_if(Gate::denies('job_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $job_expiry_date = date("Y-m-d", strtotime($request->job_expiry_date));
 
@@ -85,6 +90,7 @@ class JobController extends Controller
      */
     public function show($id)
     {
+        abort_if(Gate::denies('job_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $job = Job::find($id);
         return view('jobs.show', compact('job'));
     }
@@ -97,6 +103,7 @@ class JobController extends Controller
      */
     public function edit($id)
     {
+        abort_if(Gate::denies('job_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $job = Job::find($id);
         $jobCategoryById = JobCategory::find($job->category_id);
         $jobcategories = JobCategory::all()
@@ -113,6 +120,7 @@ class JobController extends Controller
      */
     public function update(UpdateJobRequest $request, Job $job)
     {
+        abort_if(Gate::denies('job_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $job_expiry_date = date("Y-m-d", strtotime($request->job_expiry_date));
 
         $validated = $request->validated();
@@ -146,6 +154,7 @@ class JobController extends Controller
      */
     public function destroy(Job $job)
     {
+        abort_if(Gate::denies('job_access'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $job->delete();
         //Session::flash('alert-danger', 'Successfully deleted user!');
         return redirect()->route('jobs.index')
@@ -161,6 +170,7 @@ class JobController extends Controller
      */
     public function verifyJob(Job $job, Request $request, $id)
     {
+        abort_if(Gate::denies('admin_job_verify'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $job->where('id', $id)->update([
                     'is_verified' => 1,
                     'verified_by' => Auth::id(),

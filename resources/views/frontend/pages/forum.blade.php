@@ -6,14 +6,22 @@
 
         <div class="container-fluid mt-100">
             <div class="d-flex flex-wrap justify-content-between">
-                <div> <button type="button" class="btn btn-shadow btn-wide btn-primary" data-toggle="modal" data-target="#forumModal">
-                    <span class="btn-icon-wrapper pr-2 opacity-7"> <i class="fa fa-plus fa-w-20"></i> </span>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus mr-2">
-                        <line x1="12" y1="5" x2="12" y2="19"></line>
-                        <line x1="5" y1="12" x2="19" y2="12"></line>
-                    </svg>
-                    New thread
-                </button>
+                <div>
+                    @if (Auth::id())
+                        <button type="button" class="btn btn-shadow btn-wide btn-primary" data-toggle="modal" data-target="#forumModal">
+                            <span class="btn-icon-wrapper pr-2 opacity-7"> <i class="fa fa-plus fa-w-20"></i> </span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus mr-2">
+                                <line x1="12" y1="5" x2="12" y2="19"></line>
+                                <line x1="5" y1="12" x2="19" y2="12"></line>
+                            </svg>
+                            New thread
+                        </button>
+                    @else
+                        <div class="pt-3">
+                            Please <a href="{{route('login')}}">Sign in</a> or <a href="{{route('register')}}">Register</a> to create new Thread.
+                        </div>
+                    @endif
+
                 </div>
                 <form class="form-inline" action="{{ route('forum.search') }}" method="GET">
                     @csrf
@@ -36,8 +44,9 @@
                         <div class="col ml-3">Topics</div>
                         <div class="col-4 text-muted">
                             <div class="row no-gutters align-items-center">
+                                <div class="col-4">Status</div>
                                 <div class="col-4">Replies</div>
-                                <div class="col-8">Last update</div>
+                                <div class="col-4">Created</div>
                             </div>
                         </div>
                     </div>
@@ -50,17 +59,24 @@
                 </div>
                 @endif
                 @foreach ($forum_questions as $forum_question )
+
+                    @if ($forum_question->status == 1)
+                        @php $forum_status = 'Opened';$class="badge-success"; @endphp
+                    @elseif ($forum_question->status == 2)
+                        @php $forum_status = 'Closed';$class="badge-danger" @endphp
+                    @endif
                     <div class="card-body py-3">
                         <div class="row no-gutters align-items-center">
-                            <div class="col"> <a href="{{ route('forumDetail', $forum_question->id ) }}" class="text-big" data-abc="true">{{$forum_question->question_title}}</a> <span class="badge badge-success align-text-bottom ml-1">Solved</span>
-                                <div class="text-muted small mt-1">Started {{ $forum_question->created_at->diffForHumans() }} &nbsp;·&nbsp; <a href="javascript:void(0)" class="text-muted" data-abc="true">{{ $forum_question->users->name }}</a></div>
+                            <div class="col"> <a href="{{ route('forumDetail', $forum_question->id ) }}" class="text-big" data-abc="true">{{$forum_question->question_title}}</a>
+                                <div class="text-muted small mt-1">Started {{ $forum_question->created_at->diffForHumans() }} <a href="javascript:void(0)" class="text-muted" data-abc="true"></a></div>
                             </div>
                             <div class="d-none d-md-block col-4">
                                 <div class="row no-gutters align-items-center">
-                                    <div class="col-4">12</div>
-                                    <div class="media col-8 align-items-center"> <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583246/AAA/2.jpg" alt="" class="d-block ui-w-30 rounded-circle">
+                                    <div class="col-4"> <span class="badge {{$class}} align-text-bottom ml-1">{{$forum_status}}</span></div>
+                                    <div class="col-4">{{ App\Models\ForumAnswer::countForumAnswer($forum_question->id)}}</div>
+                                    <div class="media col-4 align-items-center">
                                         <div class="media-body flex-truncate ml-2">
-                                            <div class="line-height-1 text-truncate">1 day ago</div> <a href="javascript:void(0)" class="text-muted small text-truncate" data-abc="true">by Tim cook</a>
+                                            <a href="javascript:void(0)" class="text-muted small text-truncate" data-abc="true">by {{ $forum_question->users->name }}</a>
                                         </div>
                                     </div>
                                 </div>
@@ -71,15 +87,9 @@
                 @endforeach
 
             </div>
-            <nav>
-                <ul class="pagination mb-5">
-                    <li class="page-item disabled"><a class="page-link" href="javascript:void(0)" data-abc="true">«</a></li>
-                    <li class="page-item active"><a class="page-link" href="javascript:void(0)" data-abc="true">1</a></li>
-                    <li class="page-item"><a class="page-link" href="javascript:void(0)" data-abc="true">2</a></li>
-                    <li class="page-item"><a class="page-link" href="javascript:void(0)" data-abc="true">3</a></li>
-                    <li class="page-item"><a class="page-link" href="javascript:void(0)" data-abc="true">»</a></li>
-                </ul>
-            </nav>
+            <div class="d-flex justify-content-center">
+                {!! $forum_questions->links() !!}
+            </div>
         </div>
 
         <!-- New Thread Modal -->

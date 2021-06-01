@@ -14,4 +14,13 @@ class ForumAnswer extends Model
         'question_id',
         'answer_description',
     ];
+
+    public function forumquestion()
+    {
+        return $this->belongsTo(ForumQuestion::class, 'question_id');
+    }
+
+    public static function countForumAnswer($question_id) {
+       return ForumAnswer::all()->where('question_id', $question_id)->count();
+    }
 }
