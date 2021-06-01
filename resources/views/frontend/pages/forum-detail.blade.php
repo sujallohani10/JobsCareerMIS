@@ -31,24 +31,28 @@
             </div>
 
             <div class="container-fluid">
-                
                 <div class="row">
-                    <div class="col-md-12">
-                        
-                        <div class="card mb-4 p-3 d-flex">
+                    <div class="col-md-12 mt-4">
+                        <ul>
                             @foreach ($forum_answers as $answer)
-                            <div class="forum-messages">
-                                {!! $answer->answer_description !!}
-                            </div>
-                            <small class="forum-messages-by">
-                                {{$answer->name}}
-                            </small>
+                            <li class="forum-messages d-flex">
+                                <div class="mr-3 forum-message-rply-user">
+                                    <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:40px">
+                                </div>
+                                <div>
+                                    <small class="forum-messages-by">
+                                        {{$answer->name}}
+                                    </small>
+                                    <div class="forum-message">
+                                        {!! $answer->answer_description !!}
+                                    </div>
+                                </div>
+                            </li>
+                            <hr class="border">
                             @endforeach
-                        </div>
-                         
+                        </ul>
                     </div>
-                </div>
-                               
+                </div>             
             </div>
 
 
