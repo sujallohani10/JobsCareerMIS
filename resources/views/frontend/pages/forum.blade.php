@@ -87,15 +87,9 @@
                 @endforeach
 
             </div>
-            <nav>
-                <ul class="pagination mb-5">
-                    <li class="page-item disabled"><a class="page-link" href="javascript:void(0)" data-abc="true">«</a></li>
-                    <li class="page-item active"><a class="page-link" href="javascript:void(0)" data-abc="true">1</a></li>
-                    <li class="page-item"><a class="page-link" href="javascript:void(0)" data-abc="true">2</a></li>
-                    <li class="page-item"><a class="page-link" href="javascript:void(0)" data-abc="true">3</a></li>
-                    <li class="page-item"><a class="page-link" href="javascript:void(0)" data-abc="true">»</a></li>
-                </ul>
-            </nav>
+            <div class="d-flex justify-content-center">
+                {!! $forum_questions->links() !!}
+            </div>
         </div>
 
         <!-- New Thread Modal -->

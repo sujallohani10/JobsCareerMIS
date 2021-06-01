@@ -24,9 +24,10 @@ class PagesController extends Controller
     }
 
     public function home() {
-        $jobs = Job::all()
+        $jobs = Job::orderBy('created_at', 'DESC')
                 ->where('active', 1)
-                ->where('is_verified', 1);
+                ->where('is_verified', 1)
+                ->paginate(5);
         $JobCategories = JobCategory::all();
         $search = null;
         $searchCategory = null;
@@ -63,7 +64,7 @@ class PagesController extends Controller
 
     public function forum()
     {
-        $forum_questions = ForumQuestion::all();
+        $forum_questions = ForumQuestion::orderBy('created_at', 'DESC')->paginate(5);
         //dd($forum_questions);
         $search = null;
         return view('frontend.pages.forum')->with(compact('forum_questions', 'search'));
