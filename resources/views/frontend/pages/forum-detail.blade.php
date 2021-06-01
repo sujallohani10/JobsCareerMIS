@@ -30,6 +30,27 @@
                 </div>
             </div>
 
+            <div class="container-fluid">
+                
+                <div class="row">
+                    <div class="col-md-12">
+                        
+                        <div class="card mb-4 p-3 d-flex">
+                            @foreach ($forum_answers as $answer)
+                            <div class="forum-messages">
+                                {!! $answer->answer_description !!}
+                            </div>
+                            <small class="forum-messages-by">
+                                {{$answer->name}}
+                            </small>
+                            @endforeach
+                        </div>
+                         
+                    </div>
+                </div>
+                               
+            </div>
+
 
             <!-- Reply Modal -->
         <div class="modal fade" id="replyModal" tabindex="-1" role="dialog" aria-labelledby="replyModalLabel" aria-hidden="true">
