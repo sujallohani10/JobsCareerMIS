@@ -9,6 +9,8 @@ use App\Models\Job;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Session\Session;
+use Illuminate\Support\Facades\Gate;
+use Symfony\Component\HttpFoundation\Response;
 
 class JobApplicationController extends Controller
 {
@@ -81,6 +83,7 @@ class JobApplicationController extends Controller
 
     public function jobAppliedbyStudentUser(Request $request)
     {
+        abort_if(Gate::denies('student_applied_jobs'), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $jobsapplications = DB::table('job_application')
                 ->select('job_application.*', 'jobs.job_title','jobs.company_name', 'jobs.company_address', 'jobs.created_by','users.name')
                 ->leftJoin('jobs', 'job_application.job_id', '=', 'jobs.id')

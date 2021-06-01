@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Permission;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class PermissionsTableSeeder extends Seeder
 {
@@ -29,8 +30,14 @@ class PermissionsTableSeeder extends Seeder
             [
                 'id'    => 5,
                 'title' => 'admin_job_verify',
+            ],
+            [
+                'id'    => 6,
+                'title' => 'student_applied_jobs',
             ]
         ];
+
+        DB::table('permissions')->truncate();
 
         Permission::insert($permissions);
     }
