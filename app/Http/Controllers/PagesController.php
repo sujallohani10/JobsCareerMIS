@@ -76,6 +76,7 @@ class PagesController extends Controller
         $forum_answers = ForumAnswer::select('*')
         ->join('users', 'users.id', '=', 'forum_answers.user_id')
         ->where('forum_answers.question_id', $id)
+        ->orderBy('forum_answers.created_at','ASC')
         ->get();
         return view('frontend.pages.forum-detail')->with(compact('forum_question', 'forum_answers'));
     }
@@ -84,7 +85,7 @@ class PagesController extends Controller
     {
         $search = $request->name;
         $searchCategory = $request->category;
-        $jobs = Job::query()->where('job_title', 'LIKE', "%{$request->name}%")->where('category_id', '=', "{$request->category}")->get();
+        $jobs = Job::query()->where('job_title', 'LIKE', "%{$request->name}%")->where('category_id', '=', "{$request->category}")->paginate(5);
         $JobCategories = JobCategory::all();
         return view('frontend.pages.home')->with(compact('jobs', 'search', 'JobCategories', 'searchCategory'));
     }

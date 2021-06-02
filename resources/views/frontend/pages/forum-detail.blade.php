@@ -9,11 +9,9 @@
                         <div class="card mb-4">
                             <div class="card-header">
                                 <div class="media flex-wrap w-100 align-items-center">
-                                    @if (Laravel\Jetstream\Jetstream::managesProfilePhotos())
-                                        <button class="d-block ui-w-40 rounded-circle">
-                                            <img class="d-block ui-w-40 rounded-circle" src="{{ $forum_question->users->profile_photo_url }}" alt="{{ $forum_question->users->name }}" />
-                                        </button>
-                                    @endif
+                                    <div class="mr-3 forum-message-rply-user">
+                                        <img src="https://www.w3schools.com/howto/img_avatar.png" alt="Avatar" style="width:40px">
+                                    </div>
                                     {{-- <img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1574583246/AAA/2.jpg" class="d-block ui-w-40 rounded-circle" alt=""> --}}
                                     <div class="media-body ml-3"> <a href="javascript:void(0)" data-abc="true">{{ $forum_question->users->name }}</a>
                                         <div class="text-muted small"></div>
@@ -72,7 +70,7 @@
                             @endforeach
                         </ul>
                     </div>
-                </div>             
+                </div>
             </div>
 
 
