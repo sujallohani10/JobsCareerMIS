@@ -90,7 +90,7 @@ class PagesController extends Controller
         if(isset($request->category) && $request->category >0){
             $jobs->where('category_id', '=', "{$request->category}");
         }
-        $jobs = $jobs->paginate(5);
+        $jobs = $jobs->orderBy('created_at','DESC')->paginate(5);
 
         $JobCategories = JobCategory::all();
         return view('frontend.pages.home')->with(compact('jobs', 'search', 'JobCategories', 'searchCategory'));

@@ -22,7 +22,7 @@
                     </div>
                     <div class="col-lg-4 col-sm-4">
                       <div class="input-group">
-                        <select name="category" class="form-control basic-select select2-hidden-accessible" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                        <select name="category" class="form-control basic-select select2-hidden-accessible" data-select2-id="1" tabindex="-1" aria-hidden="true" style="width: 100%;">
                           {{-- <option data-select2-id="3">Job Catogery</option> --}}
                             <option selected>Choose...</option>
                           @foreach ($JobCategories as $JobCategory)
