@@ -99,7 +99,8 @@ class PagesController extends Controller
     public function forumSearch(Request $request)
     {
         $search = $request->name;
-        $forum_questions = ForumQuestion::query()->where('question_title', 'LIKE', "%{$request->name}%")->get();
+        $forum_questions = ForumQuestion::query()->where('question_title', 'LIKE', "%{$request->name}%");
+        $forum_questions = $forum_questions->orderBy('created_at','DESC')->paginate(5);
         return view('frontend.pages.forum')->with(compact('forum_questions', 'search'));
     }
 }
