@@ -30,13 +30,15 @@
                     </x-jet-nav-link>
                 </div>
                 @endcan
-                @can('job_application')
-                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-jet-nav-link href="{{ route('jobapplication.index') }}" :active="request()->routeIs('jobapplication.index')">
-                        {{ __('Job Application') }}
-                    </x-jet-nav-link>
-                </div>
-                @endcan
+                @if(isset(Auth::user()->roles[0]->id) && Auth::user()->roles[0]->id != 1)
+                    @can('job_application')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-jet-nav-link href="{{ route('jobapplication.index') }}" :active="request()->routeIs('jobapplication.index')">
+                            {{ __('Job Application') }}
+                        </x-jet-nav-link>
+                    </div>
+                    @endcan
+                @endif
                 @can('admin_user_access')
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-jet-nav-link href="{{ route('users.index') }}" :active="request()->routeIs('users.index')">

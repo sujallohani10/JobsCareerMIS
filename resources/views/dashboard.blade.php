@@ -83,6 +83,7 @@
                     @endcan
 
 
+                    @if(isset(Auth::user()->roles[0]->id) && Auth::user()->roles[0]->id != 1)
                     @can('job_application')
                         <div class="w-full md:w-1/2 xl:w-1/3 p-6">
                             <!--Metric Card-->
@@ -100,6 +101,7 @@
                             <!--/Metric Card-->
                         </div>
                     @endcan
+                    @endif
 
                     @can('student_applied_jobs')
                         <div class="w-full md:w-1/2 xl:w-1/3 p-6">
