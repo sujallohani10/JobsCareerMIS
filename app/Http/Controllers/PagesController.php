@@ -85,7 +85,13 @@ class PagesController extends Controller
     {
         $search = $request->name;
         $searchCategory = $request->category;
-        $jobs = Job::query()->where('job_title', 'LIKE', "%{$request->name}%")->where('category_id', '=', "{$request->category}")->paginate(5);
+
+        $jobs = Job::query()->where('job_title', 'LIKE', "%{$request->name}%");
+        if(isset($request->category) && $request->category >0){
+            $jobs->where('category_id', '=', "{$request->category}");
+        }
+        $jobs = $jobs->paginate(5);
+
         $JobCategories = JobCategory::all();
         return view('frontend.pages.home')->with(compact('jobs', 'search', 'JobCategories', 'searchCategory'));
     }
