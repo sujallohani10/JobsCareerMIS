@@ -64,7 +64,7 @@ class JobApplicationController extends Controller
             $fileName = $file->getClientOriginalName();
             $path = $file->storeAs('ResumeDirectory', $fileName, 'public');
             $job_application->cv_file_path = $path;
-            $job_application->user_id = 2; //need to be session user, Auth::id()
+            $job_application->user_id = Auth::id();
             $job_application->job_id = $request['job_id'];
             $job_application->status = 1; //Applied Status
             $job_application->save();
