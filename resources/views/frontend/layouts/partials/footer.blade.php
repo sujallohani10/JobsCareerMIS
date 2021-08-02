@@ -8,10 +8,10 @@
       <div class="col-lg-3 col-md-6 footer-contact">
         <h3>JobsCareer<span>.</span></h3>
         <p>
-          A108 Adam Street <br>
-          Sydney, 535022<br>
+          25-29 Wilga Street <br>
+          Sydney, 2134<br>
           NSW, Australia <br><br>
-          <strong>Phone:</strong> +61 55 554 55<br>
+          <strong>Phone:</strong> +61 445-6329<br>
           <strong>Email:</strong> jobscareer@info.com<br>
         </p>
       </div>

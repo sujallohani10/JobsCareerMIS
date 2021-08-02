@@ -53,7 +53,7 @@
                                     <i class="ri-map-2-line mr-3 fa-3x"></i>
                                     <div>
                                         <h5 class="mb-2">Address</h5>
-                                        <span class="d-block">A108 Adam Street </span>
+                                        <span class="d-block">25-29 Wilga Street </span>
                                         <span>Sydney, Australia</span>
                                     </div>
                                 </div>
@@ -63,8 +63,8 @@
                                     <i class="ri-phone-line mr-3 fa-3x"></i>
                                     <div>
                                         <h5 class="mb-2">Phone Number</h5>
-                                        <span class="d-block">(123) 345-6789</span>
-                                        <span>(456) 478-2589</span>
+                                        <span class="d-block">(+61) 445-6329</span>
+                                        <span>(+61) 465-6223</span>
                                     </div>
                                 </div>
                             </div>
@@ -85,8 +85,8 @@
                                     <i class="ri-red-packet-line mr-3 fa-3x"></i>
                                     <div>
                                         <h5 class="mb-2">Fax</h5>
-                                        <span class="d-block">(123) 345-6789</span>
-                                        <span>(456) 478-2589</span>
+                                        <span class="d-block">(54) 325-6689</span>
+                                        <span>(54) 478-2589</span>
                                     </div>
                                 </div>
                             </div>
